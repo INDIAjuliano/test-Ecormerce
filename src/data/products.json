@@ -27,8 +27,9 @@
             }
         },
         "images": [
-            "/images/casque1.jpg",
-            "/images/casque2.jpg"
+            "casque1.webp",
+            "casque2.webp",
+            "casqueE.webp"
         ],
         "featured": true,
         "high_load_rated": false
@@ -58,8 +59,8 @@
             }
         },
         "images": [
-            "/images/gilet1.jpg",
-            "/images/gilet2.jpg"
+            "/gilet1.webp",
+            "/gilet2.webp"
         ],
         "featured": false,
         "high_load_rated": false
@@ -94,8 +95,8 @@
             }
         },
         "images": [
-            "/images/poutre1.jpg",
-            "/images/poutre2.jpg"
+            "/poutre1.webp",
+            "/poutre2.webp"
         ],
         "featured": true,
         "high_load_rated": true
@@ -124,8 +125,9 @@
             }
         },
         "images": [
-            "/images/fer1.jpg",
-            "/images/fer2.jpg"
+            "/fer1.webp",
+            "/fer2.webp",
+            "/fer3.webp"
         ],
         "featured": false,
         "high_load_rated": true
@@ -153,8 +155,8 @@
             }
         },
         "images": [
-            "/images/betonniere1.jpg",
-            "/images/betonniere2.jpg"
+            "/betonniere1.webp",
+            "/betonniere2.webp"
         ],
         "featured": true,
         "high_load_rated": false
@@ -182,8 +184,8 @@
             }
         },
         "images": [
-            "/images/perceuse1.jpg",
-            "/images/perceuse2.jpg"
+            "/perceuse1.webp",
+            "/perceuse2.webp"
         ],
         "featured": false,
         "high_load_rated": false

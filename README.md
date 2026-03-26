@@ -1,16 +1,51 @@
-# React + Vite
+# CONSTRUCT_SPEC — Construction Store
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Application web e-commerce développée avec **React + Vite** pour la vente de matériaux et équipements de construction.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+##  Fonctionnalités
 
-## React Compiler
+- Catalogue de produits (ciment, briques, peinture, fer, etc.)
+- Page détail produit
+- Panier dynamique
+- Filtrage par catégories
+- Navigation moderne et responsive
+- Menu mobile
+- Interface UI moderne
+- Simulation API (mock)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+---
 
-## Expanding the ESLint configuration
+## 🛠️ Technologies utilisées
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- React
+- Vite
+- React Router DOM
+- Context API (gestion du panier)
+- CSS
+- JSON mock data
+
+---
+
+## ⚙️ Installation
+
+### 1 — Cloner le projet
+
+git clone https://github.com/your-username/construction-store.git
+
+### 2 — Installer les dépendances
+npm install
+
+### 3 — Lancer le projet
+npm run dev
+
+### Application disponible sur :
+
+http://localhost:5173
+
+## 📦 Build production
+npm run build
+## 🎯 Objectif du projet
+
+Créer une interface e-commerce moderne pour le secteur du bâtiment avec une architecture React professionnelle et évolutive.

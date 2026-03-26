@@ -1,0 +1,115 @@
+/* HERO SECTION */
+.hero {
+    position: relative;
+    height: 85vh;
+    min-height: 700px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+@media (min-width: 768px) {
+    .hero {
+        height: 921px;
+    }
+}
+
+.hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+}
+
+.hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%) brightness(0.5);
+    animation: fadeIn 1s ease;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 1920px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s forwards;
+    animation-delay: 0.1s;
+}
+
+
+.hero-badge {
+    display: inline-block;
+    background-color: #a23f00;
+    color: white;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 1.5rem;
+    animation: slideRight 0.5s ease;
+}
+
+.hero-title {
+    font-family: 'Work Sans', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.5rem, 8vw, 5rem);
+    line-height: 0.95;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: -0.025em;
+    margin-bottom: 2rem;
+}
+
+.hero-title span {
+    color: #f26b21;
+}
+
+.hero-description {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;
+    max-width: 600px;
+    margin-bottom: 2rem;
+    line-height: 1.6;
+}
+
+@media (min-width: 768px) {
+    .hero-description {
+        font-size: 1.25rem;
+    }
+}
+
+.hero-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .hero-buttons {
+        flex-direction: row;
+        gap: 1.5rem;
+    }
+}
+
+.hero-accent {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 33.333%;
+    height: 6rem;
+    background-color: #f26b21;
+    z-index: 20;
+    display: none;
+    transform: translateY(3rem) rotate(-2deg);
+    transform-origin: bottom right;
+}
+
+@media (min-width: 1024px) {
+    .hero-accent {
+        display: block;
+    }
+}

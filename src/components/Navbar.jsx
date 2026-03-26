@@ -8,7 +8,7 @@ const Header = () => {
     const navLinks = [
         { name: 'Accueil', path: '#' },
         { name: 'Produit', path: '#' },
-        { name: 'COMMANDES EN GROS', path: '#' }
+        { name: 'Contacts', path: '#' }
     ];
 
     const toggleMobileMenu = () => {
