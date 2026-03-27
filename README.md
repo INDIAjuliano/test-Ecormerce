@@ -35,6 +35,8 @@ Application web e-commerce développée avec **React + Vite** pour la vente de m
 Avant de lancer le projet, assure-toi que ton environnement de développement est correctement configuré.
 
  - Node.js
+ - gitBash (optionnel, pour cloner le projet)
+
 ### 1 — Cloner le projet
 #### Vérifier l’installation de Node.js
 
