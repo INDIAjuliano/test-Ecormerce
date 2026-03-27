@@ -6,14 +6,16 @@ Application web e-commerce développée avec **React + Vite** pour la vente de m
 
 ##  Fonctionnalités
 
-- Catalogue de produits (ciment, briques, peinture, fer, etc.)
-- Page détail produit
-- Panier dynamique
-- Filtrage par catégories
-- Navigation moderne et responsive
-- Menu mobile
-- Interface UI moderne
-- Simulation API (mock)
+ - Catalogue de produits (ciment, briques, peinture, fer, équipements…)
+ - Recherche avec suggestions dynamiques
+ - Page détail produit
+ - Panier dynamique (Context API)
+ - Filtrage par catégories
+ - Interface responsive (desktop + mobile)
+ - Menu mobile moderne
+ - Produits populaires (featured)
+ - Simulation API via JSON (mock data)
+ - Page 404 personnalisée
 
 ---
 
@@ -28,19 +30,41 @@ Application web e-commerce développée avec **React + Vite** pour la vente de m
 
 ---
 
-## ⚙️ Installation
+# ⚙️ Installation du projet
+## Prérequis
+Avant de lancer le projet, assure-toi que ton environnement de développement est correctement configuré.
 
+ - Node.js
 ### 1 — Cloner le projet
+#### Vérifier l’installation de Node.js
 
-git clone https://github.com/your-username/construction-store.git
+```node -v ```
+
+Si Node.js n’est pas installé, télécharge-le depuis [nodejs.org](https://nodejs.org/) et installe-le.
+
+### Cloner le dépôt GitHub du projet
+ 
+ commande à exécuter dans le terminal pour cloner le projet sit tu as Git installé sur ton ordinateur. Si tu n’as pas Git, tu peux télécharger le projet en tant que fichier ZIP depuis GitHub.:
+
+ ```git clone https://github.com/INDIAjuliano/test-Ecormerce.git```
+
+ fichier ZIP : https://github.com/INDIAjuliano/test-Ecormerce.git
+
+ 
 
 ### 2 — Installer les dépendances
-npm install
+commande à exécuter dans le terminal pour installer les dépendances du projet :
+
+ ```npm install ```
 
 ### 3 — Lancer le projet
-npm run dev
+commande à exécuter dans le terminal pour démarrer le serveur de développement :
+
+ ```npm run dev```
 
 ### Application disponible sur :
+
+serveur de développement pardefault à l’adresse:
 
 http://localhost:5173
 
