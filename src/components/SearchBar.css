@@ -90,9 +90,8 @@
     position: absolute;
     top: calc(100% + 4px);
     left: 50%;
-    margin-left: -150px;
-    width: 300px;
-
+    margin-left: -240px;
+    width: auto;
     background: white;
     border: 1px solid #e0e0e0;
     border-radius: 4px;
@@ -286,7 +285,10 @@
     padding: 0.6rem;
     cursor: pointer;
     transition: all 0.2s;
+    min-width: 9rem;
 }
+
+
 
 .suggestion-card:hover {
     border-color: #a23f00;
