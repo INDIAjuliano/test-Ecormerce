@@ -1,0 +1,208 @@
+/* src/components/SearchSuggestions.css */
+.search-suggestions {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    z-index: 1000;
+    max-height: 450px;
+    overflow-y: auto;
+    animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.suggestions-header {
+    padding: 0.75rem 1rem;
+    background: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #6c757d;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.clear-recent-btn {
+    background: none;
+    border: none;
+    color: #e67e22;
+    cursor: pointer;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+
+.clear-recent-btn:hover {
+    background: #e9ecef;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.suggestion-item:hover,
+.suggestion-item.selected {
+    background-color: #f8f9fa;
+}
+
+.suggestion-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: #f0f0f0;
+    border-radius: 8px;
+    color: #e67e22;
+}
+
+.suggestion-icon .material-symbols-outlined {
+    font-size: 1.2rem;
+}
+
+.suggestion-content {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.suggestion-text-wrapper {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.suggestion-text {
+    font-size: 0.9rem;
+    color: #212529;
+    font-weight: 500;
+}
+
+.suggestion-highlight {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 0 2px;
+    border-radius: 2px;
+    font-weight: 600;
+}
+
+.suggestion-badge {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    background: #e9ecef;
+    color: #495057;
+}
+
+.suggestion-badge.exact {
+    background: #e67e22;
+    color: white;
+}
+
+.suggestion-badge.description {
+    background: #17a2b8;
+    color: white;
+}
+
+.suggestion-price {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #e67e22;
+    white-space: nowrap;
+}
+
+.suggestions-footer {
+    padding: 0.5rem 1rem;
+    background: #f8f9fa;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: #6c757d;
+}
+
+.suggestions-empty {
+    padding: 2rem;
+    text-align: center;
+    color: #6c757d;
+}
+
+.suggestions-empty .material-symbols-outlined {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #dee2e6;
+}
+
+.suggestions-empty p {
+    margin-bottom: 1rem;
+}
+
+.suggestions-empty button {
+    padding: 0.5rem 1rem;
+    background: #e67e22;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+}
+
+.suggestions-empty button:hover {
+    background: #d35400;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .search-suggestions {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+        max-height: calc(100vh - 60px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .suggestion-item {
+        padding: 1rem;
+    }
+
+    .suggestion-text {
+        font-size: 1rem;
+    }
+
+    .suggestion-price {
+        font-size: 0.9rem;
+    }
+}

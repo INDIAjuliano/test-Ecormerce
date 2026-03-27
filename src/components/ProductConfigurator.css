@@ -1,0 +1,127 @@
+/* Ajoutez ces styles à votre ProductPage.css */
+
+/* Stock Warning */
+.stock-warning {
+    margin-top: 0.5rem;
+    padding: 0.5rem;
+    border: 1px solid #ff0707;
+    border-radius: 4px;
+    color: #b30000;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-align: center;
+}
+
+
+.stock-info {
+    margin-top: 0.5rem;
+    font-size: 0.75rem;
+}
+
+.stock-available {
+    color: #28a745;
+}
+
+.stock-low {
+    color: #ffc107;
+    animation: pulse 1s infinite;
+}
+
+/* Quantity Buttons Disabled State */
+.quantity-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: #e0e0e0;
+}
+
+.quantity-btn:disabled:hover {
+    background-color: #e0e0e0;
+}
+
+/* Product SKU */
+.product-sku {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+    font-size: 0.75rem;
+    color: #999;
+    text-align: center;
+}
+
+/* Button Disabled State */
+.btn-primary:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.btn-primary:disabled:hover {
+    background-color: #ccc;
+    transform: none;
+}
+
+/* Animation pour stock faible */
+@keyframes pulse {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Rating Stars Animation */
+.stars span {
+    transition: all 0.2s ease;
+}
+
+.stars span:hover {
+    transform: scale(1.1);
+}
+
+
+/* Delivery Info Enhancement */
+.delivery-box {
+    transition: all 0.2s ease;
+}
+
+.delivery-box:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .quantity-selector {
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .quantity-control,
+    .delivery-info {
+        width: 100%;
+    }
+
+    .quantity-box {
+        width: 100%;
+    }
+
+    .dimension-grid {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    }
+
+    .trust-badges {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .badge-item {
+        flex: 1;
+        min-width: 100px;
+    }
+}

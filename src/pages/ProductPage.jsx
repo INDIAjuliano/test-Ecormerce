@@ -1,25 +1,48 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import ImageGallery from "../components/ImageGallery";
 import ProductConfigurator from '../components/ProductConfigurator';
 import TechnicalSpecs from '../components/TechnicalSpecs';
 import ApplicationsSection from '../components/ApplicationsSection';
 import { getProductById } from '../services/mockApi';
+import { useCart } from '../context/CartContext';
+
 import './ProductPage.css';
 
+
 const ProductPage = () => {
+    const { id } = useParams();
     const [product, setProduct] = useState(null);
     const [loading, setLoading] = useState(true);
-    const [selectedDimension, setSelectedDimension] = useState('200 x 200 x 6000mm');
-    const [quantity, setQuantity] = useState(12);
+    const [selectedDimension, setSelectedDimension] = useState('');
+    const [quantity, setQuantity] = useState(1);
+    const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+    const [error, setError] = useState(null);
+    const { addToCart } = useCart(); 
 
     useEffect(() => {
         const fetchProduct = async () => {
+
+            if (!id) {
+                console.error('❌ Aucun ID produit trouvé dans l\'URL');
+                setError('ID produit manquant');
+                setLoading(false);
+                return;
+            }
             setLoading(true);
             console.log('Début du chargement du produit...');
             try {
-                const productData = await getProductById(1);
-                console.log(' Produit reçu dans ProductPage:', productData);
-                console.log(' Détails du produit:');
+                const productData = await getProductById(parseInt(id));
+
+                if (!productData) {
+                    console.error(`❌ Produit avec l'ID ${id} non trouvé`);
+                    setError('Produit non trouvé');
+                    setLoading(false);
+                    return;
+                }
+
+                console.log('✅ Produit reçu dans ProductPage:', productData);
+                console.log('📦 Détails du produit:');
                 console.log('   - ID:', productData?.id);
                 console.log('   - Nom:', productData?.name);
                 console.log('   - Prix:', productData?.price, productData?.currency);
@@ -29,83 +52,221 @@ const ProductPage = () => {
                 console.log('   - Dimensions disponibles:', productData?.dimensions_available);
                 console.log('   - Spécifications techniques:', productData?.technical_specifications);
                 console.log('   - Images:', productData?.images);
+
                 setProduct(productData);
+
+                // Définir la première dimension par défaut si disponible
+                if (productData?.dimensions_available && productData.dimensions_available.length > 0) {
+                    setSelectedDimension(productData.dimensions_available[0]);
+                }
+
+                // Définir la quantité initiale
+                setQuantity(1);
+
             } catch (error) {
-                console.error('Error fetching product:', error);
+                console.error('❌ Error fetching product:', error);
             } finally {
                 setLoading(false);
             }
         };
         fetchProduct();
-    }, []);
-
-    const dimensions = [
-        '200 x 200 x 6000mm',
-        '300 x 300 x 6000mm',
-        '400 x 400 x 8000mm',
-        'COULÉE SUR MESURE'
-    ];
-
-    const images = [
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuBcsMOin4EJGt5_Iwq0lyE_18B7q3omZ_r2yjNwUEluCiJKRwD7-IvuQHwOgNm7cuJT6Zp2WCxPElhMOAikhF52Hq5AAhYL_nWrV2twNGIDlyAQ3AP06OMoT7o4mfA9vod9mWDcJVfCGHGQyit35OmiiksG8OX0Lxc0MJcDNKZ7iSlUKoZ8ytRZZhlw97gssZrWUgKQ50s2yyIKqN0O9h6xXz7QgOOYnOFyN_gckiK9hWM2Pv4AxV7zpcADuHWUTW-KlrIjVcIdKqT1',
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuCRy9a9_4rl_K6wznG_3t1CElGWctXh-Wgy0rnpycFy3evG4_Vnk5sJk6mVWZktjw41sPmNCeZIPYSCB7OXqatWhdBfxjelHtBU9gEA6GXgszuYSTsd-AgG8Eqoco3cHjPoJ98c8NWyx9CRGTKUgvSq5-rWTzFhsX0kqe-k3azZYlQ0JDl8EFHq0naodCMHzA084W6HDu4tD4Xye2WAiS-_E0FwoHsJGVjzF0UJNUM6W6Xadup4Fn-T5rq61dDAgQy7MeWR6ZYYtFMS',
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuDHCSwnMcHf1x-O28yFiiNyx0ot_QrF6H0Yhorj2tKCnFG13HEj5fkCDA-UFX2qjYJwlI2HeEcI39W-NbINcGb6di7sjwp_KsQx7sz-RLtU-SY0R_5ARJfb3sm2SMMGWVOhABdoDyXdbYf-KM2ZADVIVtzL1rM1eAnzGAM0Qrchr6Zw1OhSpXLo8XFEhGZAnruu9RUhyRcbVDsfUOOqXV0qysqXhxAJcz0W6djKOt6yvv7nYl2xKHl17Q5XTQ66-UjU0bxZE8wQOTk3',
-        'https://lh3.googleusercontent.com/aida-public/AB6AXuBaJmd8EwlbSRI4ExO3J61g-HYXneoZhGWhye_RKkJBKJ0mO87guIZ-S0uRar-3h9O2oVbtNQUXuOEhmRDQThdwv1rdRkNLG2Iv2BrbVYs3zUWqCn_gGcTS74YCh2M44Mk7gkPSQKuLC-m-Ubds1vYoOmnkR30MDozGKdALincVC4wr5yw5TzdDEGSZCDxy_JvPgcxqRaCwMcpmoZvYjXNmQkprzfXCZIomD-iS5nQv772lRivXDwsKdBGxv3xRYQ65pbiTNvReTlEI'
-    ];
+    }, [id]);
 
     const handleAddToCart = () => {
-        console.log('Added to cart:', {
-            product,
+        if (!product) return;
+
+        const cartItem = {
+            id: product.id,
+            name: product.name,
+            price: product.price,
+            currency: product.currency,
+            quantity: quantity,
             dimension: selectedDimension,
-            quantity
-        });
+            image: product.images && product.images.length > 0 ? product.images[selectedImageIndex] : null,
+            unit: product.unit || 'unité',
+            stock: product.stock
+        };
+
+        console.log('🛒 Ajout au panier:', cartItem);
+
+        // Ici vous appellerez votre fonction addToCart du contexte
+        addToCart(cartItem);
+
+        // Optionnel: Afficher une notification
+        // alert(`${quantity} x ${product.name} ajouté au panier`);
     };
 
     const handleDownloadSpecs = () => {
-        console.log('Downloading technical specs');
+        console.log('📄 Téléchargement des spécifications techniques pour:', product?.name);
+        // Logique pour télécharger les specs
+        // Par exemple: générer un PDF ou ouvrir un lien
+        if (product?.technical_specifications) {
+            const specsText = `
+                Spécifications techniques - ${product.name}
+                ${'='.repeat(50)}
+                
+                Dimensions: ${selectedDimension}
+                Matériau: ${product.technical_specifications.material || 'N/A'}
+                Traitement: ${product.technical_specifications.treatment || 'N/A'}
+                Résistance: ${product.technical_specifications.strength || 'N/A'}
+                Normes: ${product.technical_specifications.standards || 'N/A'}
+                Application: ${product.technical_specifications.application || 'N/A'}
+            `;
+
+            const blob = new Blob([specsText], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${product.name}_specifications.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            console.log('✅ Spécifications téléchargées');
+        } else {
+            console.warn('⚠️ Aucune spécification technique disponible');
+        }
+    };
+
+    const handleQuantityChange = (newQuantity) => {
+        if (product && newQuantity >= 1 && newQuantity <= product.stock) {
+            setQuantity(newQuantity);
+            console.log(`Quantité mise à jour: ${newQuantity}`);
+        } else if (newQuantity > product?.stock) {
+            console.warn(`Stock insuffisant. Maximum: ${product?.stock}`);
+            alert(`Stock limité à ${product?.stock} unités`);
+        }
+    };
+
+    const handleDimensionChange = (dimension) => {
+        setSelectedDimension(dimension);
+        console.log(`Dimension sélectionnée: ${dimension}`);
+
+        // Optionnel: Mettre à jour le prix selon la dimension
+        // Si vous avez des prix différents selon les dimensions
+        if (product?.dimensions_prices && product.dimensions_prices[dimension]) {
+            // Mettre à jour le prix
+            // setProduct({...product, price: product.dimensions_prices[dimension]});
+        }
+    };
+
+    // Formater le prix pour l'affichage
+    const formatPrice = (price, currency) => {
+        if (!price) return 'Prix non disponible';
+
+        if (currency === 'MGA') {
+            return new Intl.NumberFormat('fr-MG', {
+                style: 'currency',
+                currency: 'MGA',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(price);
+        }
+        return new Intl.NumberFormat('fr-FR', {
+            style: 'currency',
+            currency: currency || 'EUR',
+        }).format(price);
     };
 
     if (loading) {
         return (
             <div className="loading-container">
                 <div className="loading-spinner"></div>
-                <p>Loading product details...</p>
+                <p>Chargement des détails du produit...</p>
             </div>
         );
     }
 
+    if (error || !product) {
+        return (
+            <div className="error-container">
+                <span className="material-symbols-outlined error-icon">error</span>
+                <h2>Produit non trouvé</h2>
+                <p>{error || "Le produit que vous recherchez n'existe pas ou a été supprimé."}</p>
+                <button className="back-btn" onClick={() => window.history.back()}>
+                    Retour
+                </button>
+                <button className="home-btn" onClick={() => window.location.href = '/'}>
+                    Accueil
+                </button>
+            </div>
+        );
+    }
+    if (!product) {
+        return (
+            <div className="error-container">
+                <span className="material-symbols-outlined error-icon">error</span>
+                <h2>Produit non trouvé</h2>
+                <p>Le produit que vous recherchez n'existe pas ou a été supprimé.</p>
+                <button className="back-btn" onClick={() => window.history.back()}>
+                    Retour
+                </button>
+            </div>
+        );
+    }
+
+    // Préparer les images pour la galerie
+    const galleryImages = product.images && product.images.length > 0
+        ? product.images
+        : ['/placeholder.webp'];
+
+    // Préparer les dimensions disponibles
+    const availableDimensions = product.dimensions_available && product.dimensions_available.length > 0
+        ? product.dimensions_available
+        : ['Dimension standard'];
+
     return (
         <main className="container product-details-main">
             <div className="product-details-container">
-                {/* Breadcrumb */}
+                {/* Breadcrumb dynamique */}
                 <div className="breadcrumb">
                     <span>Accueil</span>
                     <span className="material-symbols-outlined separator">chevron_right</span>
-                    <span>Matériaux</span>
+                    <span>{product.category || 'Produits'}</span>
                     <span className="material-symbols-outlined separator">chevron_right</span>
-                    <span className="current">Acier de construction renforcé</span>
+                    <span className="current">{product.name}</span>
                 </div>
 
-                {/* Product Section */}
+                {/* Product Section avec données dynamiques */}
                 <section className="product-section">
-                    <ImageGallery images={images} productName={product?.name} />
+                    <ImageGallery
+                        images={galleryImages}
+                        productName={product.name}
+                        onImageSelect={setSelectedImageIndex}
+                        selectedIndex={selectedImageIndex}
+                    />
+
                     <ProductConfigurator
-                        product={product}
-                        dimensions={dimensions}
+                        product={{
+                            ...product,
+                            formattedPrice: formatPrice(product.price, product.currency)
+                        }}
+                        dimensions={availableDimensions}
                         selectedDimension={selectedDimension}
-                        onDimensionChange={setSelectedDimension}
+                        onDimensionChange={handleDimensionChange}
                         quantity={quantity}
-                        onQuantityChange={setQuantity}
+                        onQuantityChange={handleQuantityChange}
                         onAddToCart={handleAddToCart}
                         onDownloadSpecs={handleDownloadSpecs}
+                        stock={product.stock}
+                        unit={product.unit || 'unité'}
                     />
                 </section>
 
-                {/* Technical Specifications */}
-                <TechnicalSpecs />
+                {/* Technical Specifications dynamique */}
+                <TechnicalSpecs
+                    specifications={product.technical_specifications}
+                    productName={product.name}
+                    selectedDimension={selectedDimension}
+                />
 
-                {/* Applications Section */}
-                <ApplicationsSection />
+                {/* Applications Section dynamique */}
+                <ApplicationsSection
+                    applications={product.applications}
+                    productCategory={product.category}
+                    productName={product.name}
+                />
             </div>
         </main>
     );

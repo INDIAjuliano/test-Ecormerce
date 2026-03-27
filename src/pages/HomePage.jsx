@@ -1,64 +1,71 @@
-import React from 'react';
-import Hero from '@components/HeroSection';
+import React, { useState, useEffect } from 'react';
+import Hero from '../components/HeroSection';
+import ProductsSection from '../components/ProductsSection';
+import { getProducts, getFeaturedProducts } from '../services/mockApi';
 import './HomePage.css';
 
 const Home = () => {
-    const products = [
-        {
-            id: 'BOIS',
-            title: 'BOIS STRUCTUREL',
-            description: 'Sapin de Douglas grade A, bois traité sous pression, séché au séchoir.',
-            features: ['Taille 2x4 - 2x12', 'Séché au séchoir (KD)', 'Traité sous pression'],
-            icon: 'wood',
-            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuDSih4h2hTCP5RnSjuXcUbHTp-EryCvNd6G_yTebt2zkK7t1zqU9pf0rjtrc6TyPqJWiYDoPt2mBLhECB7Y8WgT32BauEXWs6nZpONV5RWDs9_Xfg27dY4Y8HDUEAnjkBcXhpRb_BADSc_cZvX2AvV8ySd4KwT5gO_rfYnIodp8jxhc-E3_ddnHwwElZqLJ--fjHR8o-aCUsfSP4zXuWq6B23YDsJvy3FNAEyel84zQ2z4KF_uNmSpfm_BgRbZmHk_aoeHPJcKRkwLt'
-        },
-        {
-            id: 'ACIER',
-            title: 'PROFILÉS STRUCTURELS',
-            description: 'Laminés à chaud, barres d\'armature Grade 60, conformité ASTM A36.',
-            features: ['ASTM A36 / A992', 'Coupe personnalisée CNC', 'Barres d\'armature Grade 60'],
-            icon: 'precision_manufacturing',
-            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAgiCkF3xgzuYPFPydqcdKyfV5VP_ljOQ3xNggEG5A5QilfvCHmxkiIqZxs9bNljUOIU-vlIgcmnrIriTlN8OWgtqc0-l95h_66EENiTyEVMt7bVB6YB-sm74GPpqWTRLOcePRt9DNfX7temU9NjNt7hCDdAdcAr1mq3BSpi11Jboc7D6JzGT3RrddXKg4nTUzNzVJbsUrMPMixA3F2Cplnrc9Axpxf6a6forJn39jszVjMsDZ0-RYGZO4xLjivCVrxeCnRCdnoVDkD'
-        },
-        {
-            id: 'BÉTON',
-            title: 'PRÊT À L\'EMPLOI',
-            description: 'Mélanges haute résistance 4000+ PSI, renfort de fibre, blocs CMU.',
-            features: ['Mélanges 4000+ PSI', 'Renfort de fibre', 'Blocs CMU certifiés'],
-            icon: 'construction',
-            image: 'https://lh3.googleusercontent.com/aida-public/AB6AXuCg0-Bf0zo3bDF_9Zc407xWiN8DHzRHHPUAkI8FxlgItjbFZRG5N7I_V5jxP3gAFU57hAZ4jLNeYP-2ppW2Q2xraAed3BRHbR57EpDBn82GnO94PpiidzQejwmuXBuVCZ08-CTUto7horYB4iqHjqjccwZmBeP7xPyobdPr_RMVqnN7-i1zlIIw-Y26dCN52GhHrI4coFWVgvA-yDZD1PaKSj8aJNq3BRh_nqGSDoVRIwfJvRD4Gelzf4Ysl_Zx15z4bTqDXGguBkl6'
-        }
-    ];
+    // CORRECTION: ajouter les deux variables du state
+    const [products, setProducts] = useState([]);      // ← CORRIGÉ
+    const [featuredProducts, setFeaturedProducts] = useState([]);
+    const [loading, setLoading] = useState(true);
 
-    const handleProductClick = (productId) => {
-        console.log(`Product clicked: ${productId}`);
-        // Add your product click logic here
-    };
+    useEffect(() => {
+        const loadData = async () => {
+            try {
+                // Charger tous les produits et les produits en vedette
+                const [allProducts, featured] = await Promise.all([
+                    getProducts(),
+                    getFeaturedProducts()
+                ]);
+
+                setProducts(allProducts);
+                setFeaturedProducts(featured);
+
+                console.log('✅ Produits chargés:', allProducts.length);
+                console.log('✅ Produits en vedette:', featured.length);
+                console.log('📦 Produits en vedette:', featured.map(p => p.name));
+            } catch (error) {
+                console.error('❌ Erreur lors du chargement des produits:', error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        loadData();
+    }, []);
 
     const handleManifestClick = () => {
         console.log('Manifest clicked');
-        // Add your manifest download logic here
+        // Ajoutez votre logique de téléchargement ici
     };
 
     const handleConsultEngineer = () => {
         console.log('Consult engineer clicked');
-        // Add your consultation logic here
+        // Ajoutez votre logique de consultation ici
     };
 
     const handleBulkPricing = () => {
         console.log('Bulk pricing clicked');
-        // Add your bulk pricing logic here
+        // Ajoutez votre logique de tarification ici
     };
+
+    if (loading) {
+        return (
+            <div className="loading-container">
+                <div className="loading-spinner"></div>
+                <p>Chargement du catalogue...</p>
+            </div>
+        );
+    }
 
     return (
         <main>
             {/* Hero Section */}
-            <>
-                <Hero />
-            </>
+            <Hero />
 
             {/* Philosophy Section */}
-            <section className=" container section bg-surface">
+            <section className="container section bg-surface">
                 <div className="container-custom">
                     <div className="philosophy-grid">
                         <div className="philosophy-text">
@@ -142,48 +149,8 @@ const Home = () => {
                 </div>
             </section>
 
-            {/* Products Section */}
-            <section className="container section bg-surface-low">
-                <div className="container-custom">
-                    <div className="section-header">
-                        <div>
-                            <span className="section-subtitle">CATÉGORIES PRINCIPALES</span>
-                            <h2 className="section-title-large">INVENTAIRE DE BASE</h2>
-                        </div>
-                        <a href="#" className="view-all">
-                            VOIR TOUS LES SPÉCIFICITÉS
-                        </a>
-                    </div>
-                    <div className="products-grid">
-                        {products.map((product) => (
-                            <div
-                                key={product.id}
-                                className="product-card"
-                                onClick={() => handleProductClick(product.id)}
-                            >
-                                <div>
-                                    <div className="product-header">
-                                        <span className="product-number">{product.id}</span>
-                                        <span className="material-symbols-outlined product-icon">
-                                            {product.icon}
-                                        </span>
-                                    </div>
-                                    <h3 className="product-title">{product.title}</h3>
-                                    <p className="product-description">{product.description}</p>
-                                    <ul className="product-features">
-                                        {product.features.map((feature, index) => (
-                                            <li key={index}>
-                                                <span className="feature-dot"></span> {feature}
-                                            </li>
-                                        ))}
-                                    </ul>
-                                </div>
-                                <img className="product-image" src={product.image} alt={product.title} />
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
+            {/* Products Section - Utilise les produits en vedette */}
+            <ProductsSection products={featuredProducts} />
 
             {/* CTA Section */}
             <section className="cta-section">

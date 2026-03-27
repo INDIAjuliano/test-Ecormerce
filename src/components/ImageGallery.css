@@ -59,8 +59,9 @@
 }
 
 .thumbnail.active {
-    border-color: #007bff;
-    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.3);
+    border-color: #f26a21;
+ 
+    box-shadow: 0 0 0 2px #f26a21;
 }
 
 .thumbnail img {
@@ -75,7 +76,7 @@
 }
 
 .thumbnail-play {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #f26a21 0%, #dadada00 100%);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -100,7 +101,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 123, 255, 0.2);
+    background: #f26a211f;
+    
     pointer-events: none;
 }
 

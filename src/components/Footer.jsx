@@ -68,7 +68,7 @@ const Footer = () => {
             {/* Footer Bottom */}
             <div className="footer-bottom">
                 <p className="footer-copyright">
-                    © 2024 CONSTRUCT_SPEC INDUSTRIAL. CONÇU POUR LA PRÉCISION — RESPONSIVE & ANIMÉ
+                    © 2026 CONSTRUCT_SPEC INDUSTRIAL. by Juliano Ind.
                 </p>
             </div>
         </footer>

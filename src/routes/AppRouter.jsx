@@ -13,7 +13,7 @@ export default function AppRouter() {
                 <Route path="/" element={<MainLayout />}>
                 <Route index element={<HomePage />} />
                 <Route path="catalogue" element={<CatalogPage />} />
-                   <Route path="produit/:id" element={<ProductPage />} />
+                   <Route path="product/:id" element={<ProductPage />} />
                  {/* <Route path="panier" element={<CartPage />} /> */}
                 <Route path="*" element={<NotFoundPage />} />
                 </Route>

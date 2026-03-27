@@ -1,0 +1,72 @@
+.notfound-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.notfound-card {
+    text-align: center;
+    max-width: 500px;
+    padding: 3rem 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.notfound-code {
+    font-size: 6rem;
+    font-weight: 900;
+    color: #a23f00;
+    /* couleur accent */
+    margin-bottom: 1rem;
+}
+
+.notfound-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.notfound-text {
+    color: var(--on-surface);
+    margin-bottom: 2rem;
+}
+
+.notfound-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Boutons (réutilise ton style existant si déjà présent) */
+.btn-primary {
+    background: #a23f00;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-primary:hover {
+    background: #c04a00;
+}
+
+.btn-outline {
+    border: 1px solid white;
+    color: white;
+    padding: 0.8rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: #0f172a;
+}
