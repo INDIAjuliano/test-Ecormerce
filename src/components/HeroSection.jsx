@@ -1,5 +1,6 @@
 import React from 'react';
 import './HeroSection.css';
+import heroImage from '../assets/hero_image_.webp';
 
 const HeroSection = () => {
 
@@ -7,7 +8,8 @@ const HeroSection = () => {
         <section className="hero">
             <div className="hero-bg">
                 <img
-                    src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_ESI4chYzP1TPjbl6I1FtTujBpqlVJb8n2-6vaRWdxhBorfHV3mnjS414gIYBs3n3QKZeB4iihsuF9LWOdFy-cAcNgLxlSskbiUCry2Nyv0h95f1r1_JYHAe4HaT-B6QQQYa8DH21lXt0YKXNBxsEOLeNLAWhfcn7wYu73Hi7Yv8f_YQBWnodLes6d3mzs4iJFkywG6nr6NvPdewfGMyAgBTvf0nbCroq0JcAZkAtOSlZ8vDBm-mn-T-119nf9ijc9HqD5Ny6EUPp"
+                    className="hero-img"
+                    src={heroImage}
                     alt="Construction site"
                 />
             </div>
