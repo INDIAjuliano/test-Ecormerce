@@ -52,7 +52,14 @@ Si Node.js n’est pas installé, télécharge-le depuis [nodejs.org](https://no
 
  fichier ZIP : https://github.com/INDIAjuliano/test-Ecormerce.git
 
- 
+ ### extraction du fichier ZIP téléchargé :
+
+ - extraire le fichier ZIP téléchargé et accéder au dossier du projet en utilisant l’explorateur de fichiers de ton système d’exploitation. Ensuite, ouvrir un terminal dans ce dossier ou utiliser la commande suivante pour accéder au dossier du projet :
+
+### exécuter la commande suivante pour accéder au dossier du projet :
+une fois que tu as extrait le fichier ZIP, tu peux accéder au dossier du projet en utilisant la commande suivante dans ton terminal :
+
+ ```cd test-Ecormerce```
 
 ### 2 — Installer les dépendances
 commande à exécuter dans le terminal pour installer les dépendances du projet :
